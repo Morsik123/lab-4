@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* ТЕМНА ТЕМА */
+.dark-mode {
+  background-color: #0f172a !important; /* Глибокий синій для фону сторінки */
+}
+
+/* Примусово перефарбовуємо основну білу картку */
+.dark-mode .bg-white {
+  background-color: #1e293b !important; /* Колір картки */
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Примусово фарбуємо весь текст у світлий */
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, 
+.dark-mode p, .dark-mode span, .dark-mode li, .dark-mode aside {
+  color: #f1f5f9 !important;
+}
+
+/* Фарбуємо блоки, які мають світло-сірий фон (наприклад, Skills або Footer) */
+.dark-mode .bg-gray-100, .dark-mode .bg-gray-50, .dark-mode .bg-gray-50\/50 {
+  background-color: #0f172a !important;
+}
+
+/* Колір для другорядного тексту */
+.dark-mode .text-gray-400, .dark-mode .text-gray-500, .dark-mode .text-gray-600 {
+  color: #94a3b8 !important;
+}

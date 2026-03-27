@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lab_2_react</title>
+    <link rel="stylesheet" href="./src/styles.css">
+    <style>
+      /* Стилі для елементів Частини 1 (Vanilla JS) */
+      #vanilla-part-container {
+        margin: 20px auto;
+        max-width: 800px;
+        font-family: sans-serif;
+        padding: 0 15px;
+      }
+      #vanilla-comments-list {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+      .vanilla-comment-item {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 10px 0;
+      }
+      .vanilla-comment-item:last-child {
+        border-bottom: none;
+      }
+      #vanilla-footer {
+        padding: 15px;
+        background: #f8f9fa;
+        text-align: center;
+        font-size: 11px;
+        border-top: 2px solid #e9ecef;
+        color: #6c757d;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <div id="vanilla-part-container">
+      <div id="vanilla-comments-list">
+        <h4 style="margin-top: 0;">Відгуки (Частина 1: Fetch API)</h4>
+        <div id="comments-loader">Завантаження коментарів...</div>
+      </div>
+
+      <footer id="vanilla-footer">
+        Завантаження системної інформації...
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // --- ЗАВДАННЯ 1: LocalStorage [cite: 6, 7] ---
+      
+      // 1. Збираємо інформацію про ОС та браузер [cite: 45]
+      const sysInfo = "Platform: " + navigator.platform + " | UserAgent: " + navigator.userAgent;
+
+      // 2. Зберігаємо у localStorage [cite: 9, 45]
+      localStorage.setItem('vanilla_system_info', sysInfo);
+
+      // 3. Зчитуємо та відображаємо у футері [cite: 10, 46]
+      const storedData = localStorage.getItem('vanilla_system_info');
+      const footer = document.getElementById('vanilla-footer');
+      if (footer) {
+        footer.textContent = "Частина 1 (LocalStorage): " + storedData;
+      }
+
+      // --- ЗАВДАННЯ 2: Fetch API [cite: 15, 47] ---
+      
+      const variantId = 10; // Твій номер варіанту [cite: 51]
+
+      // Використовуємо fetch для отримання коментарів [cite: 17, 48]
+      fetch(`https://jsonplaceholder.typicode.com/posts/${variantId}/comments`)
+        .then(response => response.json()) // Парсимо JSON [cite: 20]
+        .then(data => {
+          const loader = document.getElementById('comments-loader');
+          loader.innerHTML = ''; // Очищуємо текст завантаження
+
+          // Відображаємо коментарі у порядку отримання [cite: 52]
+          data.forEach(comment => {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'vanilla-comment-item';
+            commentDiv.innerHTML = `
+              <strong>${comment.name}</strong> <br>
+              <small style="color: #007bff;">${comment.email}</small>
+              <p style="margin: 5px 0 0; font-style: italic;">"${comment.body}"</p>
+            `;
+            document.getElementById('comments-loader').appendChild(commentDiv);
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error); // Обробка помилок [cite: 21]
+          document.getElementById('comments-loader').textContent = "Помилка завантаження відгуків.";
+        });
+    </script>
+  </body>
+</html>
