@@ -1,6 +1,6 @@
 function Experience() {
   const jobs = [
-    { title: "Freelance Digital Artist", date: "October 2025 - Present", desc: "Digital illustrations and concept art for international clients." },
+    { title: "Freelance12313 Digital Artist", date: "October 2025 - Present", desc: "Digital illustrations and concept art for international clients." },
     { title: "Sales Manager", date: "June 2024 - March 2026", desc: "Client relations and sales management." }
   ];
 
